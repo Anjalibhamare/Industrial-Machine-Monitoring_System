@@ -134,7 +134,7 @@ Stores and processes incoming machine data and acts as the **central processing 
 
 
 ## 🔄 Working Flow
-
+```markdown
 **Start Monitoring**
 ⬇️
 **Receive Data (Message Queue - Planned)**
