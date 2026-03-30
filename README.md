@@ -64,7 +64,7 @@ The **Industrial Machine Monitoring System** is a full-stack **Linux systems pro
 
 ## 🏗️ System Architecture
 
-```## 🏗️ System Architecture
+## 🏗️ System Architecture
 ![System Architecture](docs/architecture.svg)
 
 ## 🔄 Data Flow
