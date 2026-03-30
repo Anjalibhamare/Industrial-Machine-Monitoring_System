@@ -136,13 +136,13 @@ Stores and processes incoming machine data and acts as the **central processing 
 
 
 **Start Monitoring**
-      ↓
+      ⬇️
 **Receive Data (Message Queue - Planned)**
-      ↓
+      ⬇️
 **Analyze Values**
-      ↓
+      ⬇️
 **Check Conditions**
-      ↓
+      ⬇️
 **Generate Alerts**
 
 ### ⚠️ Condition Checking
@@ -155,15 +155,15 @@ Stores and processes incoming machine data and acts as the **central processing 
 
 ### 🔄 Working Flow
 **Create Log File**
-      ↓
+      ⬇️
 **Write Data**
-      ↓
+      ⬇️
 **Move File Pointer (lseek)**
-      ↓
+      ⬇️
 **Continuous Logging**
-      ↓
+      ⬇️
 **Handle Signal (SIGINT)**
-      ↓
+     ⬇️
 **Close File**
 
 ### ⚙️ File Operations
