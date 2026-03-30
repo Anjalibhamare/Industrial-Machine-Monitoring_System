@@ -41,7 +41,6 @@ The system simulates a factory where:
 # ✅ ⭐ Box Style
 ## 🔁 System Flow
 
-```text
 Main Controller
      ↓
 Creates Processes
