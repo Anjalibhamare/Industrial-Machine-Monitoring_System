@@ -38,3 +38,231 @@ The system simulates a factory where:
 ---
 
 ## 🔁 Overall Working Flow
+# ✅ ⭐ Box Style
+## 🔁 System Flow
+
+```text
+Main Controller
+     ↓
+Creates Processes
+     ↓
+Machine Processes (Threads generate data)
+     ↓
+Monitor Process (Analyzes data)
+     ↓
+Logger Process (Writes data to file)
+
+
+---
+
+## 🏗️ 4. System Architecture
+
+### 🔹 Components
+
+### 1️⃣ Main Controller (`kpit.c`)
+- Controls entire system  
+- Creates processes  
+
+### 2️⃣ Machine Processes (`machine.c`)
+- Simulate machines  
+- Generate sensor data using threads  
+
+### 3️⃣ Monitor Process (`monitor.c`)
+- Receives and processes data  
+- Detects abnormal conditions  
+
+### 4️⃣ Logger Process (`logger.c`)
+- Writes data to log file  
+
+---
+
+## ⚙️ 5. Detailed Working of Each Module
+
+---
+
+### 🔹 5.1 Main Controller (`kpit.c`)
+
+#### Responsibilities:
+- Starts system execution  
+- Creates child processes using `fork()`  
+- Executes programs using `exec()`  
+- Manages processes using `waitpid()`  
+
+#### Working:
+- Program starts  
+- Calls `fork()` multiple times  
+- Each child runs:
+  - machine  
+  - monitor  
+  - logger  
+- Parent waits for child processes  
+
+---
+
+### 🔹 5.2 Machine Module (`machine.c`)
+
+#### Purpose:
+Simulates an industrial machine using **multithreading**
+
+---
+
+#### Step-by-step Working:
+
+### 1. Read Machine ID
+- Uses `argv[1]`
+
+```bash
+./machine 1
+
+## ⚙️ Machine Module Flow (machine.c)
+
+
++------------------------------+
+| Initialize Data Structure |
+| production, temp, vibration |
++--------------+---------------+
+↓
++------------------------------+
+| Create Threads |
+| Production / Temp / Vib |
++--------------+---------------+
+↓
++------------------------------+
+| Thread Execution |
+| Generate Random Values |
++--------------+---------------+
+↓
++------------------------------+
+| Update Shared Data |
+| (Using Mutex) |
++--------------+---------------+
+↓
++------------------------------+
+| Synchronization |
+| Prevent Race Condition |
++--------------+---------------+
+↓
++------------------------------+
+| Output |
+| Temp, Production, Vibration |
++------------------------------+
+
+
+---
+
+## 🧠 Thread Details
+
+| Thread | Function |
+|--------|---------|
+| Production Thread | Generates production count |
+| Temperature Thread | Generates temperature |
+| Vibration Thread | Generates vibration |
+
+---
+
+## 📊 Output Example
+
+```text
+Machine 1 → Temp: 65, Prod: 40, Vib: 3
+
+Monitor Module (monitor.c)
+🎯 Purpose
+
+Acts as the central processing unit
+
+🔄 Working Flow
+Start Monitoring
+      ↓
+Receive Data (Message Queue - Planned)
+      ↓
+Analyze Values
+      ↓
+Check Conditions
+      ↓
+Generate Alerts
+⚠️ Condition Checking
+Temperature > 80 → Alert
+Vibration > threshold → Warning
+📊 Output Example
+Machine 2 overheating
+📝 Logger Module (logger.c)
+🎯 Purpose
+
+Stores system data into file
+
+🔄 Working Flow
+Create Log File
+      ↓
+Write Data
+      ↓
+Move File Pointer (lseek)
+      ↓
+Continuous Logging
+      ↓
+Handle Signal (SIGINT)
+      ↓
+Close File & Exit
+⚙️ File Operations
+Operation	Function
+Create file	open()
+Write data	write()
+Move pointer	lseek()
+⚠️ Signal Handling
+SIGINT (Ctrl + C)
+
+Actions:
+
+Close file
+Exit safely
+🧠 Technologies Used
+🔹 Process Control
+Function	Purpose
+fork()	Create processes
+exec()	Execute programs
+waitpid()	Manage processes
+🔹 Threads
+Parallel execution
+Sensor simulation
+🔹 Mutex
+Prevents data corruption
+Ensures safe access
+🔹 File Handling
+Function	Purpose
+open()	Create file
+write()	Write data
+lseek()	Move pointer
+🔹 Signals
+Signal	Purpose
+SIGINT	Graceful shutdown
+🔹 IPC (Planned)
+Message Queue → Machine → Monitor communication
+Shared Memory → Monitor → Logger communication
+🔄 Data Flow
+Machine (Threads)
+        ↓
+Generate Data
+        ↓
+Message Queue (planned)
+        ↓
+Monitor
+        ↓
+Shared Memory (planned)
+        ↓
+Logger
+        ↓
+Log File
+
+## ⚙️ File Operations
+
+| Operation     | Function  |
+|--------------|----------|
+| Create file  | `open()` |
+| Write data   | `write()`|
+| Move pointer | `lseek()`|
+
+---
+
+## ⚠️ Signal Handling
+
+```text
+SIGINT (Ctrl + C)
