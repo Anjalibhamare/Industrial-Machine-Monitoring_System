@@ -153,7 +153,7 @@ Stores and processes incoming machine data and acts as the **central processing 
 -Machine 2 overheating
 
 ### 🔄 Working Flow
-` ```text``` `
+
 **Create Log File**
       ⬇️
 **Write Data**
@@ -165,6 +165,7 @@ Stores and processes incoming machine data and acts as the **central processing 
 **Handle Signal (SIGINT)**
      ⬇️
 **Close File**
+
 
 ### ⚙️ File Operations
 Operation	Function
