@@ -110,8 +110,7 @@ Simulates an industrial machine using **multithreading**
 ### 1. Read Machine ID
 - Uses `argv[1]`
 
-```bash
-./machine 1
+
 
 ## ⚙️ Machine Module Flow (machine.c)
 
@@ -161,7 +160,7 @@ Simulates an industrial machine using **multithreading**
 
 ## 📊 Output Example
 
-```text
+
 Machine 1 → Temp: 65, Prod: 40, Vib: 3
 
 Monitor Module (monitor.c)
@@ -263,5 +262,4 @@ Log File
 
 ## ⚠️ Signal Handling
 
-```text
 SIGINT (Ctrl + C)
