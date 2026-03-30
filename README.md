@@ -64,11 +64,6 @@ The **Industrial Machine Monitoring System** is a full-stack **Linux systems pro
 
 ## 🏗️ System Architecture
 
-## 🏗️ System Architecture
-![System Architecture](docs/architecture.svg)
-
-## 🔄 Data Flow
-![Data Flow](docs/dataflow.svg)
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                    INDUSTRIAL MACHINE MONITORING SYSTEM                      ║
 ║                         High-Level Architecture                              ║
