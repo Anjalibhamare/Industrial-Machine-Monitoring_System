@@ -122,52 +122,58 @@ Simulates an industrial machine using **multithreading**
 
 ## 📊 Output Example
 
-
 Machine 1 → Temp: 65, Prod: 40, Vib: 3
 
-Monitor Module (monitor.c)
-🎯 Purpose
 
-Acts as the central processing unit
+## 🧠 Monitor Module (`monitor.c`)
 
-🔄 Working Flow
-Start Monitoring
-      ↓
-Receive Data (Message Queue - Planned)
-      ↓
-Analyze Values
-      ↓
-Check Conditions
-      ↓
-Generate Alerts
-⚠️ Condition Checking
-Temperature > 80 → Alert
-Vibration > threshold → Warning
-📊 Output Example
-Machine 2 overheating
-📝 Logger Module (logger.c)
-🎯 Purpose
+### 🎯 Purpose
+Stores and processes incoming machine data and acts as the **central processing unit**
 
-Stores system data into file
+---
 
-🔄 Working Flow
-Create Log File
-      ↓
-Write Data
-      ↓
-Move File Pointer (lseek)
-      ↓
-Continuous Logging
-      ↓
-Handle Signal (SIGINT)
-      ↓
-Close File & 
+### 🔄 Working Flow
 
-⚙️ File Operations
+
+**Start Monitoring**
+      ↓
+**Receive Data (Message Queue - Planned)**
+      ↓
+**Analyze Values**
+      ↓
+**Check Conditions**
+      ↓
+**Generate Alerts**
+
+### ⚠️ Condition Checking
+
+-Temperature > 80 → Alert
+-Vibration > threshold → Warning
+
+### 📊 Output Example
+-Machine 2 overheating
+
+### 🔄 Working Flow
+**Create Log File**
+      ↓
+**Write Data**
+      ↓
+**Move File Pointer (lseek)**
+      ↓
+**Continuous Logging**
+      ↓
+**Handle Signal (SIGINT)**
+      ↓
+**Close File**
+
+### ⚙️ File Operations
 Operation	Function
-Create file	open()
-Write data	write()
-Move pointer	lseek()
+| Operation | Function |
+|--------|---------|
+| Create file| open() |
+| Write data | write() |
+| Move pointer | lseek()|
+
 ⚠️ Signal Handling
 SIGINT (Ctrl + C)
 
@@ -227,20 +233,20 @@ SIGINT (Ctrl + C)
 
 - Message Queue → Machine → Monitor communication  
 - Shared Memory → Monitor → Logger communication  
-🔄 Data Flow
-Machine (Threads)
+### 🔄 Data Flow
+**Machine (Threads)**
         ↓
-Generate Data
+**Generate Data**
         ↓
-Message Queue (planned)
+**Message Queue (planned)**
         ↓
-Monitor
+**Monitor**
         ↓
-Shared Memory (planned)
+**Shared Memory (planned)**
         ↓
-Logger
+**Logger**
         ↓
-Log File
+**Log File**
 
 ## ⚙️ File Operations
 
