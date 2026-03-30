@@ -236,6 +236,7 @@ SIGINT (Ctrl + C)
 - Message Queue → Machine → Monitor communication  
 - Shared Memory → Monitor → Logger communication  
 ## 🔄 Data Flow
+
 **Machine (Threads)**
         ↓
 **Generate Data**
@@ -246,8 +247,7 @@ SIGINT (Ctrl + C)
         ↓
 **Shared Memory (planned)**
         ↓
-**Logger**![Uploading ChatGPT Image Mar 30, 2026, 10_53_40 AM.png…]()
-
+**Logger**
         ↓
 **Log File**
 
