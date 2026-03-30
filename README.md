@@ -39,6 +39,7 @@ The system simulates a factory where:
 
 ## 🔁 Overall Working Flow
 
+
 ## 🔁 System Flow
 
 **Main Controller**  
@@ -245,7 +246,8 @@ SIGINT (Ctrl + C)
         ↓
 **Shared Memory (planned)**
         ↓
-**Logger**
+**Logger**![Uploading ChatGPT Image Mar 30, 2026, 10_53_40 AM.png…]()
+
         ↓
 **Log File**
 
