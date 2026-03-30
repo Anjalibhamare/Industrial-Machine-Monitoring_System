@@ -104,7 +104,6 @@ Logger Process (Writes data to file)
 Simulates an industrial machine using **multithreading**
 
 ---
-
 #### Step-by-step Working:
 
 ### 1. Read Machine ID
@@ -112,41 +111,7 @@ Simulates an industrial machine using **multithreading**
 
 
 
-## ⚙️ Machine Module Flow (machine.c)
 
-
-+------------------------------+
-| Initialize Data Structure |
-| production, temp, vibration |
-+--------------+---------------+
-↓
-+------------------------------+
-| Create Threads |
-| Production / Temp / Vib |
-+--------------+---------------+
-↓
-+------------------------------+
-| Thread Execution |
-| Generate Random Values |
-+--------------+---------------+
-↓
-+------------------------------+
-| Update Shared Data |
-| (Using Mutex) |
-+--------------+---------------+
-↓
-+------------------------------+
-| Synchronization |
-| Prevent Race Condition |
-+--------------+---------------+
-↓
-+------------------------------+
-| Output |
-| Temp, Production, Vibration |
-+------------------------------+
-
-
----
 
 ## 🧠 Thread Details
 
@@ -199,7 +164,8 @@ Continuous Logging
       ↓
 Handle Signal (SIGINT)
       ↓
-Close File & Exit
+Close File & 
+
 ⚙️ File Operations
 Operation	Function
 Create file	open()
@@ -208,33 +174,62 @@ Move pointer	lseek()
 ⚠️ Signal Handling
 SIGINT (Ctrl + C)
 
-Actions:
+### ⚠️ Signal Handling
 
-Close file
-Exit safely
-🧠 Technologies Used
-🔹 Process Control
-Function	Purpose
-fork()	Create processes
-exec()	Execute programs
-waitpid()	Manage processes
-🔹 Threads
-Parallel execution
-Sensor simulation
-🔹 Mutex
-Prevents data corruption
-Ensures safe access
-🔹 File Handling
-Function	Purpose
-open()	Create file
-write()	Write data
-lseek()	Move pointer
-🔹 Signals
-Signal	Purpose
-SIGINT	Graceful shutdown
-🔹 IPC (Planned)
-Message Queue → Machine → Monitor communication
-Shared Memory → Monitor → Logger communication
+**Actions:**
+- Close file  
+- Exit safely  
+
+---
+
+## 🧠 Technologies Used
+
+---
+
+### 🔹 Process Control
+
+| Function     | Purpose            |
+|-------------|--------------------|
+| `fork()`    | Create processes   |
+| `exec()`    | Execute programs   |
+| `waitpid()` | Manage processes   |
+
+---
+
+### 🔹 Threads
+- Parallel execution  
+- Sensor simulation  
+
+---
+
+### 🔹 Mutex
+- Prevents data corruption  
+- Ensures safe access  
+
+---
+
+### 🔹 File Handling
+
+| Function | Purpose      |
+|----------|-------------|
+| `open()` | Create file |
+| `write()`| Write data  |
+| `lseek()`| Move pointer|
+
+---
+
+### 🔹 Signals
+
+| Signal | Purpose           |
+|--------|------------------|
+| SIGINT | Graceful shutdown|
+
+---
+
+### 🔹 IPC (Planned)
+
+- Message Queue → Machine → Monitor communication  
+- Shared Memory → Monitor → Logger communication  
 🔄 Data Flow
 Machine (Threads)
         ↓
