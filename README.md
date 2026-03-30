@@ -132,7 +132,7 @@ Stores and processes incoming machine data and acts as the **central processing 
 
 ---
 
-### 🔄 Working Flow
+## 🔄 Working Flow
 
 
 **Start Monitoring**
@@ -233,7 +233,7 @@ SIGINT (Ctrl + C)
 
 - Message Queue → Machine → Monitor communication  
 - Shared Memory → Monitor → Logger communication  
-### 🔄 Data Flow
+## 🔄 Data Flow
 **Machine (Threads)**
         ↓
 **Generate Data**
