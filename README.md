@@ -132,17 +132,17 @@ Stores and processes incoming machine data and acts as the **central processing 
 
 ---
 
+
 ## 🔄 Working Flow
 
-
 **Start Monitoring**
-      ⬇️
+⬇️
 **Receive Data (Message Queue - Planned)**
-      ⬇️
+⬇️
 **Analyze Values**
-      ⬇️
+⬇️
 **Check Conditions**
-      ⬇️
+⬇️
 **Generate Alerts**
 
 ### ⚠️ Condition Checking
