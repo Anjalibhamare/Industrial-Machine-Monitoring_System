@@ -1,0 +1,139 @@
+<svg width="100%" viewBox="0 0 680 640" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<text font-family="sans-serif" font-size="15" font-weight="500" x="340" y="26" text-anchor="middle" fill="#1a1a1a">End-to-end data flow</text>
+
+<!-- STEP 1: MACHINE PROCESS -->
+<rect x="40" y="44" width="190" height="44" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="135" y="62" text-anchor="middle" fill="#085041">Machine process</text>
+<text font-family="sans-serif" font-size="12" x="135" y="79" text-anchor="middle" fill="#0F6E56">machine.c (ID passed via argv)</text>
+
+<!-- 3 thread boxes -->
+<rect x="40" y="104" width="56" height="42" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="13" font-weight="500" x="68" y="122" text-anchor="middle" fill="#085041">Prod</text>
+<text font-family="sans-serif" font-size="12" x="68" y="138" text-anchor="middle" fill="#0F6E56">thread</text>
+
+<rect x="107" y="104" width="56" height="42" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="13" font-weight="500" x="135" y="122" text-anchor="middle" fill="#085041">Temp</text>
+<text font-family="sans-serif" font-size="12" x="135" y="138" text-anchor="middle" fill="#0F6E56">thread</text>
+
+<rect x="174" y="104" width="56" height="42" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="13" font-weight="500" x="202" y="122" text-anchor="middle" fill="#085041">Vib</text>
+<text font-family="sans-serif" font-size="12" x="202" y="138" text-anchor="middle" fill="#0F6E56">thread</text>
+
+<!-- mutex box -->
+<rect x="40" y="162" width="190" height="34" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" x="135" y="180" text-anchor="middle" fill="#444441">pthread_mutex_lock → update struct</text>
+
+<!-- machine header → threads -->
+<line x1="68"  y1="88" x2="68"  y2="104" stroke="#1D9E75" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+<line x1="135" y1="88" x2="135" y2="104" stroke="#1D9E75" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+<line x1="202" y1="88" x2="202" y2="104" stroke="#1D9E75" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+
+<!-- threads → mutex -->
+<line x1="68"  y1="146" x2="100" y2="162" stroke="#1D9E75" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+<line x1="135" y1="146" x2="135" y2="162" stroke="#1D9E75" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+<line x1="202" y1="146" x2="168" y2="162" stroke="#1D9E75" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+
+<!-- Machine → MQ arrow -->
+<line x1="135" y1="196" x2="135" y2="238" stroke="#378ADD" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text font-family="sans-serif" font-size="12" x="150" y="220" fill="#185FA5">msgsnd()</text>
+
+<!-- STEP 2: MESSAGE QUEUE -->
+<rect x="40" y="238" width="190" height="52" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="135" y="258" text-anchor="middle" fill="#0C447C">Message queue</text>
+<text font-family="sans-serif" font-size="12" x="135" y="275" text-anchor="middle" fill="#185FA5">{ id, production, temp, vib }</text>
+
+<!-- side badge -->
+<rect x="260" y="250" width="160" height="28" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" x="340" y="264" text-anchor="middle" fill="#185FA5">msgget · ftok() key</text>
+<line x1="230" y1="264" x2="260" y2="264" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="4 3" fill="none"/>
+
+<!-- MQ → Monitor arrow -->
+<line x1="135" y1="290" x2="135" y2="334" stroke="#D85A30" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text font-family="sans-serif" font-size="12" x="150" y="314" fill="#D85A30">msgrcv()</text>
+
+<!-- STEP 3: MONITOR -->
+<rect x="40" y="334" width="190" height="44" rx="10" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="135" y="353" text-anchor="middle" fill="#712B13">Monitor process</text>
+<text font-family="sans-serif" font-size="12" x="135" y="370" text-anchor="middle" fill="#993C1D">monitor.c — analyse + alert</text>
+
+<!-- alert badges -->
+<rect x="260" y="334" width="180" height="24" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" x="350" y="346" text-anchor="middle" fill="#A32D2D">Temp &gt; 80 → OVERHEATING</text>
+
+<rect x="260" y="364" width="180" height="24" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" x="350" y="376" text-anchor="middle" fill="#854F0B">Vib &gt; 5 → MACHINE FAULT</text>
+
+<line x1="230" y1="352" x2="260" y2="346" stroke="#993C1D" stroke-width="0.5" stroke-dasharray="4 3" fill="none"/>
+<line x1="230" y1="364" x2="260" y2="376" stroke="#854F0B" stroke-width="0.5" stroke-dasharray="4 3" fill="none"/>
+
+<!-- Monitor → SHM arrow -->
+<line x1="135" y1="378" x2="135" y2="424" stroke="#D4537E" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text font-family="sans-serif" font-size="12" x="150" y="404" fill="#D4537E">semop wait → shm write</text>
+
+<!-- STEP 4: SHARED MEMORY -->
+<rect x="40" y="424" width="190" height="52" rx="10" fill="#FBEAF0" stroke="#993556" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="135" y="444" text-anchor="middle" fill="#72243E">Shared memory</text>
+<text font-family="sans-serif" font-size="12" x="135" y="461" text-anchor="middle" fill="#993556">{ id, prod, temp, vib, alert }</text>
+
+<!-- semaphore badge -->
+<rect x="260" y="434" width="170" height="28" rx="8" fill="#FBEAF0" stroke="#993556" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" x="345" y="448" text-anchor="middle" fill="#993556">semget · semop sync access</text>
+<line x1="230" y1="450" x2="260" y2="450" stroke="#993556" stroke-width="0.5" stroke-dasharray="4 3" fill="none"/>
+
+<!-- SHM → Logger arrow -->
+<line x1="135" y1="476" x2="135" y2="520" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text font-family="sans-serif" font-size="12" x="150" y="500" fill="#5F5E5A">semop wait → shm read</text>
+
+<!-- STEP 5: LOGGER -->
+<rect x="40" y="520" width="190" height="44" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="135" y="540" text-anchor="middle" fill="#633806">Logger process</text>
+<text font-family="sans-serif" font-size="12" x="135" y="557" text-anchor="middle" fill="#854F0B">logger.c — read SHM · write file</text>
+
+<!-- Logger → File arrow -->
+<line x1="230" y1="542" x2="446" y2="542" stroke="#BA7517" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text font-family="sans-serif" font-size="12" x="338" y="534" text-anchor="middle" fill="#BA7517">open · write · lseek · close</text>
+
+<!-- STEP 6: LOG FILE -->
+<rect x="446" y="520" width="210" height="64" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="551" y="542" text-anchor="middle" fill="#444441">logs/machine.log</text>
+<text font-family="sans-serif" font-size="12" x="551" y="560" text-anchor="middle" fill="#5F5E5A">timestamp | machine | prod</text>
+<text font-family="sans-serif" font-size="12" x="551" y="575" text-anchor="middle" fill="#5F5E5A">temp | vibration | status</text>
+
+<!-- STEP NUMBERS -->
+<circle cx="16" cy="66"  r="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="11" font-weight="500" x="16" y="70" text-anchor="middle" fill="#3C3489">1</text>
+
+<circle cx="16" cy="264" r="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="11" font-weight="500" x="16" y="268" text-anchor="middle" fill="#3C3489">2</text>
+
+<circle cx="16" cy="356" r="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="11" font-weight="500" x="16" y="360" text-anchor="middle" fill="#3C3489">3</text>
+
+<circle cx="16" cy="450" r="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="11" font-weight="500" x="16" y="454" text-anchor="middle" fill="#3C3489">4</text>
+
+<circle cx="16" cy="542" r="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="11" font-weight="500" x="16" y="546" text-anchor="middle" fill="#3C3489">5</text>
+
+<circle cx="660" cy="552" r="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="11" font-weight="500" x="660" y="556" text-anchor="middle" fill="#3C3489">6</text>
+
+<!-- LEGEND -->
+<line x1="40"  y1="616" x2="70"  y2="616" stroke="#378ADD" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text font-family="sans-serif" font-size="12" x="76" y="620" fill="#444441">IPC send</text>
+
+<line x1="160" y1="616" x2="190" y2="616" stroke="#D4537E" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text font-family="sans-serif" font-size="12" x="196" y="620" fill="#444441">Shared mem</text>
+
+<line x1="296" y1="616" x2="326" y2="616" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>
+<text font-family="sans-serif" font-size="12" x="332" y="620" fill="#444441">File write</text>
+
+<line x1="412" y1="616" x2="442" y2="616" stroke="#999" stroke-width="0.5" stroke-dasharray="4 3" fill="none"/>
+<text font-family="sans-serif" font-size="12" x="448" y="620" fill="#444441">Side note</text>
+</svg>
