@@ -132,7 +132,7 @@ Stores and processes incoming machine data and acts as the **central processing 
 
 ---
 
-` ```markdown `
+` ```markdown 
 ## 🔄 Working Flow
 
 **Start Monitoring**
