@@ -131,10 +131,9 @@ Machine 1 → Temp: 65, Prod: 40, Vib: 3
 Stores and processes incoming machine data and acts as the **central processing unit**
 
 ---
-
-` ```markdown 
+'''markdown
 ## 🔄 Working Flow
-
+```text 
 **Start Monitoring**
 ⬇️
 **Receive Data (Message Queue - Planned)**
