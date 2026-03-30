@@ -38,21 +38,18 @@ The system simulates a factory where:
 ---
 
 ## 🔁 Overall Working Flow
-# ✅ ⭐ Box Style
+
 ## 🔁 System Flow
 
-Main Controller
-     ↓
-Creates Processes
-     ↓
-Machine Processes (Threads generate data)
-     ↓
-Monitor Process (Analyzes data)
-     ↓
-Logger Process (Writes data to file)
-
-
----
+**Main Controller**  
+⬇️  
+**Creates Processes**  
+⬇️  
+**Machine Processes (Threads generate data)**  
+⬇️  
+**Monitor Process (Analyzes data)**  
+⬇️  
+**Logger Process (Writes data to file)**
 
 ## 🏗️ 4. System Architecture
 
